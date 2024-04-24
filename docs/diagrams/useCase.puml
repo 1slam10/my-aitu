@@ -1,0 +1,40 @@
+@startuml UseCase
+left to right direction
+skinparam PackageStyle rect
+
+actor "Guest" as Guest
+actor "User" as User
+
+rectangle "MyAITU" {
+    Guest --> (Login)
+    User --> (Main Page)
+    User --> (Profile Page)
+}
+
+rectangle "Login" {
+    (Login) --> (Enter Credentials)
+    (Enter Credentials) --> (Submit)
+    Submit -> (Authenticate)
+    (Authenticate) --> (Main Page)
+}
+
+rectangle "Main Page" {
+    (Main Page) --> (Mobile student ID)
+    (Main Page) --> (Announcements)
+    (Main Page) --> (Event tracking)
+    (Main Page) --> (Library)
+    (Main Page) --> (Moodle)
+    (Main Page) --> (University Map)
+    (Main Page) --> (Guide about University Life)
+    (Main Page) --> (Surveys and votes)
+    (Main Page) --> (Job Opportunities for students)
+}
+
+rectangle "Profile Page" {
+    (Profile Page) --> (Language)
+    (Profile Page) --> (Theme)
+}
+
+@enduml
+
+
