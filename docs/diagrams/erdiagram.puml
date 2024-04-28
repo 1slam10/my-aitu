@@ -1,0 +1,86 @@
+@startuml Entity Relationship Diagram
+
+
+entity "Student" as student {
+    * **id: UUID <<generated>> <<PK>>**
+    ---
+    * name_latin: string
+    * surname_latin: string
+    * name_cyrillic: string
+    * surname_cyrillic: string
+    * middlename_cyrillic: string
+    * group: string
+    * education_program: string
+    * educational_program_code: string 
+    * email: string
+    * IIN: string
+    * birthdate: timestamp
+    * financing: ENUM('SCHOLARSHIP', 'PAID')
+    * phone: string
+    * email: string
+    * status: string
+    * student_status: string
+    * degree: ENUM('BACHELOR', 'MASTER', 'COLLEGE')
+    * course: ENUM(1, 2, 3)
+    * department: string
+    * is_academic_mobility: bool
+    * is_retire: bool
+}
+
+entity "University Employees" as employee {
+    * **id: UUID <<generated>> <<PK>>**
+    ---
+    * name_latin: string
+    * surname_latin: string
+    * name_cyrillic: string
+    * surname_cyrillic: string
+    * middlename_cyrillic: string
+    * position: string
+    * department: string
+    * email: string
+}
+
+entity "Announcement" as announcement {
+    * **id: UUID <<generated>> <<PK>>**
+    ---
+    * published_at: timestamp
+    * title: string
+    * description: string
+    * has_banner: boolean
+    * banner_url: URL
+    ---
+    * **created_by: UUID <<FK>>**
+}
+
+entity "Event" as event {
+    * **id: UUID <<generated>> <<PK>>**
+    ---
+    * starts_at: timestamp
+    * ends_at: timestamp
+    * published_at: timestamp
+    * registration_start_at: timestamp
+    * registration_end_at: timestamp
+    * title: string
+    * description: string
+    * has_banner: boolean
+    * banner_url: URL
+    * event_type: ENUM('ONLINE', 'OFFLINE', 'HYBRID')
+    * location: string
+    * registration_link: URL
+    ---
+    * **created_by: UUID <<FK>>**
+}
+
+entity "Contacts" as contacts {
+    * title
+    ---
+    * email: string
+    * phone: string
+    * room: string
+}
+
+announcement }o--||employee : Create
+employee ||-o{ event: Create
+student  }o--o{ event: Register
+
+@enduml
