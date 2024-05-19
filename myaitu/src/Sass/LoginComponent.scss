@@ -1,0 +1,89 @@
+$blueColor: #3478F6;
+$darkBlueColor: #285bba;
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: white;
+}
+
+.login-wrapper {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+
+    .login-wrapper-inner {
+        margin: 0;
+    }
+
+    .heading {
+        font-family: system-ui;
+        font-weight: 500;
+        color: rgba($color: #000000, $alpha: 0.9)
+    }
+
+    .subheading {
+        margin-top: -25px;
+        font-family: system-ui;
+    }
+}
+
+.auth-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 300px;
+
+    .common-input {
+        height: 30px;
+        padding: 10px;
+        background-color: white;
+        color: #212121;
+        outline: none;
+        border: 1px solid #212121;
+        border-radius: 5px;
+        font-family: system-ui;
+        font-weight: 400;
+        font-size: 16px;
+        margin: 10px 0px;
+    }
+    .common-input:focus {
+        outline: 1px solid $blueColor;
+    }
+
+    ::placeholder {
+        font-family: system-ui;
+        font-size: 16px;
+    }
+}
+
+.login-btn {
+    width: 300px;
+    height: 50px;
+    margin: 0px;
+    margin-top: 20px;
+    cursor: pointer;
+    background-color: $blueColor;
+    border-radius: 30px;
+    outline: none;
+    border: none;
+    font-family: system-ui;
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+}
+
+.login-btn:hover {
+    background-color: $darkBlueColor;
+}
+
+.aitu-logo {
+    height: 100px;
+    position:absolute;
+    top: 30px;
+    left: 30px;
+}
