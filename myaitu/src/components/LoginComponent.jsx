@@ -1,17 +1,56 @@
 import React, { useState } from 'react';
 import { LoginAPI } from '../api/AuthAPI';
 import AituLogo from '../assets/AituLogo.png';
+import { toast } from 'react-toastify';
 import '../Sass/LoginComponent.scss'
 
 export default function LoginComponent() {
 
     const [credentials, setCredentials] = useState({});
 
+    const validateEmail = () => {
+        if (!credentials.email || !credentials.password) {
+            toast.error("Please fill in all fields");
+            return false;
+        }
+
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@astanait\.edu\.kz$/;
+
+        if (!emailPattern.test(credentials.email)) {
+            toast.error("Invalid email format");
+            return false;
+        }
+
+        return true;
+    }
+
+    const validatePassword = () => {
+        if (credentials.password.length < 6) {
+            toast.error("Password must be at least 6 characters long");
+            return false;
+        }
+
+        return true;
+    }
+
+    const validateInput = () => {
+        return validatePassword() && validateEmail();
+    }
+
     const login = async () => {
-        let res = await LoginAPI(credentials.email, credentials.password);
-        console.log(credentials.email, credentials.password)
-        
-        console.log(res?.user);
+        if (!validateInput()) return;
+
+        let result;
+
+        try {
+            result = await LoginAPI(credentials.email, credentials.password);
+            toast.success("Signed in successfully!");
+        } catch (error) {
+            console.log(error);
+            toast.error("Please check your credentials")
+        }
+
+        console.log(result);
     }
 
     return (
