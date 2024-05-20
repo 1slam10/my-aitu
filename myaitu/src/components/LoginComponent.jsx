@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { LoginAPI } from '../api/AuthAPI';
 import AituLogo from '../assets/AituLogo.png';
 import { toast } from 'react-toastify';
-import '../Sass/LoginComponent.scss'
+import { useNavigate } from "react-router-dom";
+import '../Sass/LoginComponent.scss';
 
 export default function LoginComponent() {
 
     const [credentials, setCredentials] = useState({});
+    const navigate = useNavigate();
 
     const validateEmail = () => {
         if (!credentials.email || !credentials.password) {
@@ -45,6 +47,8 @@ export default function LoginComponent() {
         try {
             result = await LoginAPI(credentials.email, credentials.password);
             toast.success("Signed in successfully!");
+
+            navigate('/home')
         } catch (error) {
             console.log(error);
             toast.error("Please check your credentials")
